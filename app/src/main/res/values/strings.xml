@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Recipes</string>
+    <string name="search">Search for recipes</string>
+    <string name="popular_recipes">Popular Recipes</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="results_for">Results for \"%1$s\"</string>
+    <string name="open_on_website">Open on website</string>
+    <string name="summary">Summary</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="similar_recipes">Similar Recipes</string>
+    <string name="no_results_for">No results for \"%1$s\"</string>
+    <string name="retry">Retry</string>
+</resources>
