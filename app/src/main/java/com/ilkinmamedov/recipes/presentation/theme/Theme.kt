@@ -84,7 +84,7 @@ private val darkScheme = darkColorScheme(
 
 @Composable
 fun RecipesTheme(
-    content: @Composable() () -> Unit
+    content: @Composable () -> Unit
 ) {
     MaterialTheme(
         colorScheme = if (isSystemInDarkTheme()) darkScheme else lightScheme,

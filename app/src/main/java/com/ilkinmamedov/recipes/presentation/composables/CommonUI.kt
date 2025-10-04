@@ -58,6 +58,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import coil.compose.AsyncImage
 import com.ilkinmamedov.domain.model.DetailRecipe
@@ -244,7 +245,7 @@ fun RecipeCard(
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = if (title.length > 50) title.substring(0, 50) + "..." else title,
+                text = if (title.length > 50) title.take(50) + "..." else title,
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp,
                 modifier = Modifier.padding(horizontal = 16.dp)
@@ -259,7 +260,7 @@ fun RecipeCard(
                         }
                     },
                     update = {
-                        it.text = HtmlCompat.fromHtml(if (summary.length > 250) summary.substring(0, 250) + "..." else summary, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                        it.text = HtmlCompat.fromHtml(if (summary.length > 250) summary.take(250) + "..." else summary, HtmlCompat.FROM_HTML_MODE_LEGACY)
                     },
                     modifier = Modifier.padding(horizontal = 16.dp)
                 )
@@ -426,16 +427,15 @@ fun DetailSummary(
             factory = {
                 TextView(it).apply {
                     textSize = 18.0F
-                    setTextColor(it.getColor(R.color.gray))
+                    setTextColor(ContextCompat.getColor(it, R.color.gray))
                 }
             },
             update = {
-                it.text = HtmlCompat.fromHtml(if (summary.length > 250 && isExpandedSummary) summary else summary.substring(0, 250) + "...", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                it.text = HtmlCompat.fromHtml(if (summary.length > 250 && isExpandedSummary) summary else summary.take(250) + "...", HtmlCompat.FROM_HTML_MODE_LEGACY)
             },
             modifier = Modifier
                 .animateContentSize()
-                .padding(top = 16.dp)
-                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp, start = 16.dp, end = 16.dp)
                 .clickable { onToggleExpandedSummary() }
         )
     }
@@ -508,7 +508,7 @@ fun DetailSimilarRecipes(
             LazyRow {
                 items(recipes) { recipe ->
                     RecipeCard(
-                        title = if (recipe.title.length > 25) recipe.title.substring(0, 25) + "..." else recipe.title,
+                        title = if (recipe.title.length > 25) recipe.title.take(25) + "..." else recipe.title,
                         image = "https://img.spoonacular.com/recipes/${recipe.id}-556x370.${recipe.imageType}",
                         onOpenDetail = { onOpenDetail(recipe.id) }
                     )
